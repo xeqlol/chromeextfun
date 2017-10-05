@@ -15,7 +15,7 @@ build
 .tmp
 src/**/*.map
 src/**/*.js
-
+*.js
 # Ignore Test reporters
 ###################
 **/test/coverage
