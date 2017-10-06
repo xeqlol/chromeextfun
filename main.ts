@@ -12,7 +12,7 @@ chrome.webRequest.onBeforeRequest.addListener((details) => {
 			chrome.browserAction.getTitle({tabId: tab.id}, (text) => {totalCount = text.split(' ')[0] != "" ? +text.split(' ')[0] : 0});
 			chrome.browserAction.getBadgeText({tabId: tab.id}, (text) => {
 				var count: number = text != "" ? +text : 0;
-				if(text != "99+" && count <= 99) {
+				if(text != "99+" && count < 99) {
 					chrome.browserAction.setBadgeText({tabId: tab.id, text: (++count).toString()});
 				}else{
 					chrome.browserAction.setBadgeText({tabId: tab.id, text: "99+"});chrome.browserAction.setBadgeText({tabId: tab.id, text: "99+"});
