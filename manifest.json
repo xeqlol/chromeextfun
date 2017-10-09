@@ -6,10 +6,11 @@
 	"description": "response traffic counter",
 	"author": "anonymous",
 
-	"permissions": ["background", "tabs", "webRequest", "webRequestBlocking", "*://*/*"],
+	"permissions": ["<all_urls>","webRequest","webRequestBlocking"],
 
 	"background": {
-		"scripts": ["main.js"]
+		"scripts": ["main.js"],
+		"persistent": true
 	},
 
 	"browser_action": {
