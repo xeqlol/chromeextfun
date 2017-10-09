@@ -18,15 +18,17 @@ chrome.webRequest.onResponseStarted.addListener((details) => {
 		var index: number = requests.findIndex(x => x.tabId == tab.id);
 		for (var i = 0; i < details.responseHeaders.length; ++i) {
 			if (details.responseHeaders[i].name.toLowerCase() == "content-length") {
-
 				requests[index].totralTraffic += (+details.responseHeaders[i].value);
+
 				var sizes: string[] = ["b", "k", "m", "g", "t"];
 				var order: number = 0;
 				var length: number = requests[index].totralTraffic;
+				
 				while(length >= 1024 && order < sizes.length - 1) {
 					order++;
 					length /= 1024;
 				} 
+
 				var formatedLength: number = length < 10 ? roundUp(length, 10) : roundUp(length, 1);
 
 				chrome.browserAction.setBadgeText({tabId: tab.id, text: formatedLength + "" + sizes[order]});
