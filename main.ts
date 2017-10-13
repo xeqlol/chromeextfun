@@ -9,7 +9,6 @@ var requests: Traffic[] = [];
 
 chrome.browserAction.setBadgeBackgroundColor({color: [100, 100, 100, 225]});
 
-
 chrome.webRequest.onResponseStarted.addListener((details) => {
 	chrome.tabs.get(details.tabId, (tab) => {
 		if(requests.findIndex(x => x.tabId == tab.id) == -1) {
@@ -20,7 +19,7 @@ chrome.webRequest.onResponseStarted.addListener((details) => {
 			if (details.responseHeaders[i].name.toLowerCase() == "content-length") {
 				requests[index].totralTraffic += (+details.responseHeaders[i].value);
 
-				var sizes: string[] = ["b", "k", "m", "g", "t"];
+				var sizes: string[] = ["b", "k", "m", "g", "t", "umad"];
 				var order: number = 0;
 				var length: number = requests[index].totralTraffic;
 				
@@ -32,12 +31,15 @@ chrome.webRequest.onResponseStarted.addListener((details) => {
 				var formatedLength: number = length < 10 ? roundUp(length, 10) : roundUp(length, 1);
 
 				chrome.browserAction.setBadgeText({tabId: tab.id, text: formatedLength + "" + sizes[order]});
-				chrome.browserAction.setTitle({tabId: tab.id, title: roundUp(length, 100) + sizes[order].toUpperCase() + "b in total"})
+				if(order == 5) {
+					chrome.browserAction.setTitle({tabId: tab.id, title: "staph bruh, u totally mad"});
+				}
+				chrome.browserAction.setTitle({tabId: tab.id, title: roundUp(length, 100) + sizes[order].toUpperCase() + "b in total"});
 			}
 		}
 	});
 }, {urls: ["<all_urls>"]}, ["responseHeaders"]);
 
 function roundUp(num, precision): number {
-	return Math.ceil(num * precision) / precision
+	return Math.ceil(num * precision) / precision;
 }
