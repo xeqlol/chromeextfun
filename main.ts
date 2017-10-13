@@ -32,7 +32,7 @@ chrome.webRequest.onResponseStarted.addListener((details) => {
 
 				chrome.browserAction.setBadgeText({tabId: tab.id, text: formatedLength + "" + sizes[order]});
 				if(order == 5) {
-					chrome.browserAction.setTitle({tabId: tab.id, title: "staph bruh, u totally mad"});
+					chrome.browserAction.setTitle({tabId: tab.id, title: "staph bruh, u r totally mad"});
 				}
 				chrome.browserAction.setTitle({tabId: tab.id, title: roundUp(length, 100) + sizes[order].toUpperCase() + "b in total"});
 			}
