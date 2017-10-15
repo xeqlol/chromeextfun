@@ -30,11 +30,15 @@ chrome.webRequest.onResponseStarted.addListener((details) => {
 
 				var formatedLength: number = length < 10 ? roundUp(length, 10) : roundUp(length, 1);
 
-				chrome.browserAction.setBadgeText({tabId: tab.id, text: formatedLength + "" + sizes[order]});
 				if(order == 5) {
+					chrome.browserAction.setBadgeText({tabId: tab.id, text: "umad");
 					chrome.browserAction.setTitle({tabId: tab.id, title: "staph bruh, u r totally mad"});
 				}
-				chrome.browserAction.setTitle({tabId: tab.id, title: roundUp(length, 100) + sizes[order].toUpperCase() + "b in total"});
+				else
+				{
+					chrome.browserAction.setBadgeText({tabId: tab.id, text: formatedLength + "" + sizes[order]});
+					chrome.browserAction.setTitle({tabId: tab.id, title: roundUp(length, 100) + sizes[order].toUpperCase() + "b in total"});
+				}
 			}
 		}
 	});
